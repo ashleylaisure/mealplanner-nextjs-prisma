@@ -1,0 +1,130 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String   @default("")
+  role      Role     @default(USER)
+
+  // each user can have multiple meals
+  meals     Meal[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Food {
+  id            Int       @id @default(autoincrement())
+  name          String    @unique
+  calories      Float?
+  protein       Float?
+  fat           Float?
+  carbohydrate  Float?
+  fiber         Float?
+  sugar         Float?
+
+  // each food can belong to one category
+  category      Category?   @relation(fields: [categoryId], references: [id])
+  categoryId    Int?
+  // each food can have multiple serving units
+  foodServingUnit FoodServingUnit[]
+  servingUnits  ServingUnit[]
+  // each food can be part of a meal
+  meal         Meal?       @relation(fields: [mealId], references: [id])
+  mealId        Int?
+  // each food can be part of multiple meal items
+  MealFood     MealFood[]
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+
+  // each category can have multiple foods
+  foods     Food[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServingUnit {
+  id        Int    @id @default(autoincrement())
+  name      String @unique
+
+  // each serving unit can be associated with multiple foods
+  foodServingUnit FoodServingUnit[]
+  // each serving unit can belong to one food
+  foods     Food @relation(fields: [foodId], references: [id])
+  foodId    Int
+  // each serving unit can be part of multiple meal items
+  mealFoods MealFood[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// This is a join table to represent many-to-many relationship between Food and ServingUnit
+model FoodServingUnit {
+  id            Int      @id @default(autoincrement())
+  food          Food     @relation(fields: [foodId], references: [id])
+  foodId        Int
+  servingUnit   ServingUnit @relation(fields: [servingUnitId], references: [id])
+  servingUnitId Int
+  grams         Float?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Meal {
+  id        Int      @id @default(autoincrement())
+  dateTime  DateTime
+
+  // each meal can have multiple meal items
+  food Food[]
+  // each meal belongs to one user
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    Int?
+  // each meal can have multiple meal foods
+  mealFoods MealFood[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model MealFood {
+  id        Int      @id @default(autoincrement())
+  meal      Meal     @relation(fields: [mealId], references: [id])
+  mealId    Int
+  food      Food     @relation(fields: [foodId], references: [id])
+  foodId    Int
+  servingUnit  ServingUnit @relation(fields: [servingUnitId], references: [id])
+  servingUnitId Int
+  amount    Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
