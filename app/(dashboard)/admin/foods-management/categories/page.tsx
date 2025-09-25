@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoryCards from './_components/CategoryCards'
+import CategoryCards from '@/components/cards/CategoryCards';
 
 const CategoriesPage = () => {
   return (
