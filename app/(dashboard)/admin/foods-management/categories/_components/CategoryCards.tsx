@@ -4,6 +4,7 @@ import { useCategories } from '../_services/use-queries';
 import { useDeleteCategory } from '../_services/use-mutations';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash } from 'lucide-react';
+import { alert } from '@/lib/state/GlobalStore';
 
 const CategoryCards = () => {
   const categoriesQuery = useCategories();
@@ -18,7 +19,19 @@ const CategoryCards = () => {
             <Button className="size-6" variant='ghost' size="icon" onClick={() => {}}>
               <Edit />
             </Button>
-            <Button className="size-6" variant='ghost' size="icon" onClick={() => {deleteCategoryMutation.mutate(item.id)}}>
+            <Button 
+              className="size-6" 
+              variant='ghost' 
+              size="icon" 
+              onClick={() => {
+                alert({
+                  title: "Delete Category",
+                  description: `Are you sure you want to delete the category "${item.name}"? This action cannot be undone.`,
+                  confirmLabel: "Delete",
+                  cancelLabel: "Cancel",
+                  onConfirm: () => {deleteCategoryMutation.mutate(item.id)}
+                })
+              }}>
               <Trash />
             </Button>
           </div>

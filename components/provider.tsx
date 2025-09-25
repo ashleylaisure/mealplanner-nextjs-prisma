@@ -4,6 +4,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode } from "react";
 import { Toaster } from "./ui/sonner";
+import AlertDialogProvider from "./AlertDialogProvider";
 
 
 export default function Providers({ children }: { children: ReactNode }) {
@@ -18,6 +19,7 @@ export default function Providers({ children }: { children: ReactNode }) {
                 disableTransitionOnChange
             >
                 <Toaster />
+                <AlertDialogProvider />
                 {children}
             </NextThemesProvider>
 
