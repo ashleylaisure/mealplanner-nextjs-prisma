@@ -14,7 +14,7 @@ export async function getCategory (id: number): Promise<CategorySchema> {
     })
     return {
         action: "update",
-        name: response?.name || "",
+        name: response?.name ?? "",
         id,
     }
 }

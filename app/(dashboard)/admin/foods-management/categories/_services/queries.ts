@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query"
 import { getCategories, getCategory } from "./services"
+import useCategoriesStore from "@/lib/state/useCategoriesStore"
 
 const useCategories = () => {
     return useQuery({
@@ -9,11 +10,12 @@ const useCategories = () => {
 }
 
 const useCategory = () => {
-    const selectedCategoryId = useCategoriesStore()
+    const selectedCategoryId = useCategoriesStore(state => state.selectedCategoryId)
     
     return useQuery({
         queryKey: ['categories', {selectedCategoryId}],
-        queryFn: () => getCategory(selectedCategoryId)
+        queryFn: () => getCategory(selectedCategoryId!),
+        enabled: !!selectedCategoryId,
     })
 }
 
