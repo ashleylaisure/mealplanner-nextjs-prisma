@@ -1,7 +1,7 @@
 'use client';
 
-import { useCreateCategory, useUpdateCategory } from '@/app/(dashboard)/admin/foods-management/categories/_services/mutations';
-import { useCategory } from '@/app/(dashboard)/admin/foods-management/categories/_services/queries';
+import { useCreateCategory, useUpdateCategory } from '@/services/mutations/categories.mutations';
+import { useCategory } from '@/services/queries/categories.queries';
 import useCategoriesStore from '@/lib/state/useCategoriesStore';
 import { categoryDefaultValues, categorySchema, CategorySchema } from '@/types/categorySchema';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,9 +50,9 @@ const CategoryForm = ({ smallTrigger }: CategoryFormProps) => {
     const isPending =
         createCategoryMutation.isPending || updateCategoryMutation.isPending;
 
-    const handleDialogOpenChange = (open: boolean) => {
-        updateCategoryDialogOpen(open);
-        if (!open) {
+    const handleDialogOpenChange = (isOpen: boolean) => {
+        updateCategoryDialogOpen(isOpen);
+        if (!isOpen) {
             updateSelectedCategoryId(null);
             form.reset(categoryDefaultValues);
         }

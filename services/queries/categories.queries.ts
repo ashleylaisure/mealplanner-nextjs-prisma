@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { getCategories, getCategory } from "./services"
+import { getCategories, getCategory } from "../categories.services"
 import useCategoriesStore from "@/lib/state/useCategoriesStore"
 
 const useCategories = () => {

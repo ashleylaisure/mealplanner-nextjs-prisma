@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { useCategories } from '@/app/(dashboard)/admin/foods-management/categories/_services/queries';
-import { useDeleteCategory } from '@/app/(dashboard)/admin/foods-management/categories/_services/mutations';
+import { useCategories } from '@/services/queries/categories.queries';
+import { useDeleteCategory } from '@/services/mutations/categories.mutations';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash } from 'lucide-react';
 import { alert } from '@/lib/state/GlobalStore';
@@ -34,7 +34,7 @@ const CategoryCards = () => {
             <p className="truncate">{item.name}</p>
             <div className="flex gap-1">
               <Button 
-                className="size-6" 
+                className="size-6 hover:bg-primary/15" 
                 variant='ghost' 
                 size="icon" 
                 onClick={() => {
@@ -44,7 +44,7 @@ const CategoryCards = () => {
                 <Edit />
               </Button>
               <Button 
-                className="size-6" 
+                className="size-6 hover:bg-primary/15" 
                 variant='ghost' 
                 size="icon" 
                 onClick={() => {

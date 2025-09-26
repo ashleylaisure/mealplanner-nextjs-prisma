@@ -77,8 +77,8 @@ model ServingUnit {
   // each serving unit can be associated with multiple foods
   foodServingUnit FoodServingUnit[]
   // each serving unit can belong to one food
-  foods     Food @relation(fields: [foodId], references: [id])
-  foodId    Int
+  foods     Food? @relation(fields: [foodId], references: [id])
+  foodId    Int?
   // each serving unit can be part of multiple meal items
   mealFoods MealFood[]
 
