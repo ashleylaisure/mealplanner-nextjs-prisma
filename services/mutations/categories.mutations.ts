@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createCategory, deleteCategory, updateCategory } from "../categories.services";
 import { toast } from "sonner";
-import { CategorySchema } from "@/types/categorySchema";
+import { CategorySchema } from "@/types/schema/categorySchema";
 
 const useCreateCategory = () => {
     const queryClient = useQueryClient();

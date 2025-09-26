@@ -3,7 +3,7 @@
 import { useCreateCategory, useUpdateCategory } from '@/services/mutations/categories.mutations';
 import { useCategory } from '@/services/queries/categories.queries';
 import useCategoriesStore from '@/lib/state/useCategoriesStore';
-import { categoryDefaultValues, categorySchema, CategorySchema } from '@/types/categorySchema';
+import { categoryDefaultValues, categorySchema, CategorySchema } from '@/types/schema/categorySchema';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form';
 import {

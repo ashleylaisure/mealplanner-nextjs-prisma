@@ -1,7 +1,7 @@
 'use server'
 import { executeAction } from "@/lib/executeAction";
 import db from "@/lib/prisma";
-import { ServingUnitSchema } from "@/types/servingUnitSchema";
+import { ServingUnitSchema } from "@/types/schema/servingUnitSchema";
 
 // CREATE
 const createServingUnit = async (data: ServingUnitSchema) => {

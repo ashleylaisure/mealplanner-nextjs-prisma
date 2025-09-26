@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../app/generated/prisma"
+  // output   = "../app/generated/prisma"
 }
 
 datasource db {
@@ -39,7 +39,7 @@ model Food {
   calories      Float?
   protein       Float?
   fat           Float?
-  carbohydrate  Float?
+  carbohydrate Float?
   fiber         Float?
   sugar         Float?
 
@@ -47,7 +47,7 @@ model Food {
   category      Category?   @relation(fields: [categoryId], references: [id])
   categoryId    Int?
   // each food can have multiple serving units
-  foodServingUnit FoodServingUnit[]
+  foodServingUnits FoodServingUnit[]
   servingUnits  ServingUnit[]
   // each food can be part of a meal
   meal         Meal?       @relation(fields: [mealId], references: [id])

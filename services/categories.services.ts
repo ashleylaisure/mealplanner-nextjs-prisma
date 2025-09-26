@@ -1,7 +1,7 @@
 'use server'
 import { executeAction } from "@/lib/executeAction";
 import db from "@/lib/prisma"
-import { CategorySchema } from "@/types/categorySchema";
+import { CategorySchema } from "@/types/schema/categorySchema";
 
 
 export async function getCategories() {

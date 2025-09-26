@@ -1,4 +1,4 @@
-import { ServingUnitSchema } from "@/types/servingUnitSchema";
+import { ServingUnitSchema } from "@/types/schema/servingUnitSchema";
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { createServingUnit, deleteServingUnit, updateServingUnit } from "../servingunits.services";
 import { toast } from "sonner";
