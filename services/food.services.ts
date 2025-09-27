@@ -1,8 +1,10 @@
+'use server'
+import { executeAction } from "@/lib/executeAction";
 import db from "@/lib/prisma";
-import { toStringSafe } from "@/lib/utils";
+import { toNumberSafe, toStringSafe } from "@/lib/utils";
 import { PaginatedResult } from "@/types/globalTypes";
 import { foodFilterSchema, FoodFilterSchema } from "@/types/schema/foodFilterSchema";
-import { FoodSchema } from "@/types/schema/foodSchema";
+import { foodSchema, FoodSchema } from "@/types/schema/foodSchema";
 import { Prisma } from "@prisma/client";
 
 
@@ -14,7 +16,38 @@ export type FoodWithServingUnits = Prisma.FoodGetPayload<{
 }>;
 
 // CREATE
+const createFood = async (data: FoodSchema) => {
+    await executeAction({
+        actionFn: async () => {
+            const validatedData = foodSchema.parse(data);
 
+            const food = await db.food.create({
+                data: {
+                    name: validatedData.name,
+                    calories: toNumberSafe(validatedData.calories),
+                    carbohydrate: toNumberSafe(validatedData.carbohydrate),
+                    fat: toNumberSafe(validatedData.fat),
+                    fiber: toNumberSafe(validatedData.fiber),
+                    sugar: toNumberSafe(validatedData.sugar),
+                    protein: toNumberSafe(validatedData.protein),
+                    categoryId: toNumberSafe(validatedData.categoryId) || null,
+                },
+            });
+
+            await Promise.all(
+                validatedData.foodServingUnits.map(async (unit) => {
+                    await db.foodServingUnit.create({
+                        data: {
+                            foodId: food.id,
+                            servingUnitId: toNumberSafe(unit.foodServingUnitId),
+                            grams: toNumberSafe(unit.grams),
+                        },
+                    });
+                }),
+            );
+        },
+    });
+};
 // READ - INDEX
 const getFoods = async (filters: FoodFilterSchema): Promise<PaginatedResult<FoodWithServingUnits>> => {
 
@@ -109,7 +142,6 @@ const getFoods = async (filters: FoodFilterSchema): Promise<PaginatedResult<Food
         totalPages: Math.ceil(total / pageSize),
     }
 }
-
 // READ - BY ID
 const getFood = async (id: number): Promise<FoodSchema | null> => {
     const res = await db.food.findFirst({
@@ -140,6 +172,108 @@ const getFood = async (id: number): Promise<FoodSchema | null> => {
     };
 };
 // UPDATE
-// DELETE
+const updateFood = async (data: FoodSchema) => {
+    await executeAction({
+        actionFn: async () => {
+            // 1️⃣ Validate input
+            const validatedData = foodSchema.parse(data);
+            if (validatedData.action === "update") {
+                // 2️⃣ Update main Food fields
+                await db.food.update({
+                    where: { id: validatedData.id },
+                    data: {
+                        name: validatedData.name,
+                        calories: toNumberSafe(validatedData.calories),
+                        carbohydrate: toNumberSafe(validatedData.carbohydrate),
+                        fat: toNumberSafe(validatedData.fat),
+                        fiber: toNumberSafe(validatedData.fiber),
+                        sugar: toNumberSafe(validatedData.sugar),
+                        protein: toNumberSafe(validatedData.protein),
+                        categoryId: toNumberSafe(validatedData.categoryId) || null,
+                    },
+                });
 
-export { getFoods, getFood };
+                // 3️⃣ Fetch existing foodServingUnits
+                // const existingUnits = await db.foodServingUnit.findMany({
+                //     where: { foodId: validatedData.id },
+                // });
+                // const existingUnitIds = new Set(existingUnits.map((unit) => unit.id));
+
+                // const incomingUnits = validatedData.foodServingUnits
+                // const incomingUnitServingIds = new Set(incomingUnits.map((unit) => toNumberSafe(unit.foodServingUnitId)));
+
+                // 4️⃣ Update existing units
+                // await Promise.all(
+                //     incomingUnits
+                //         .filter((unit) => 
+                //             // Find the existing unit with matching servingUnitId
+                //             existingUnitIds.has(toNumberSafe(unit.foodServingUnitId))
+                //         )
+                //         .map((unit) => {
+                //             db.foodServingUnit.update({
+                //                 where: { id: toNumberSafe(unit.foodServingUnitId) },
+                //                 data: { grams: toNumberSafe(unit.grams)},
+                //             });
+                //         })
+                //     );
+                
+                 // 5️⃣ Create new units
+
+                // await Promise.all(
+                //     incomingUnits
+                //         .filter((unit) => !existingUnitIds.has(toNumberSafe(unit.foodServingUnitId)))
+                //         .map((unit) =>
+                //             db.foodServingUnit.create({
+                //                 data: {
+                //                     foodId: validatedData.id,
+                //                     servingUnitId: toNumberSafe(unit.foodServingUnitId),
+                //                     grams: toNumberSafe(unit.grams),
+                //                 },
+                //             });
+                //         );
+                //     )
+
+                // 6️⃣ Delete removed units
+                // await Promise.all(
+                //     existingUnits
+                //         .filter((unit) => !incomingUnitServingIds.has(unit.servingUnitId))
+                //         .map((unit) =>
+                //             db.foodServingUnit.delete({
+                //                 where: { id: unit.id },
+                //             })
+                //         )
+                // );
+
+                await db.foodServingUnit.deleteMany({
+                    where: { foodId: validatedData.id },
+                });
+
+                await Promise.all(
+                    validatedData.foodServingUnits.map(async (unit) => {
+                        await db.foodServingUnit.create({
+                            data: {
+                                foodId: validatedData.id,
+                                servingUnitId: toNumberSafe(unit.foodServingUnitId),
+                                grams: toNumberSafe(unit.grams),
+                            },
+                        });
+                    }),
+                );
+            }
+        },
+    });
+};
+// DELETE
+const deleteFood = async (id: number) => {
+    await executeAction({
+        actionFn: async () => {
+            await db.foodServingUnit.deleteMany({
+                where: { foodId: id },
+            });
+
+            await db.food.delete({ where: { id } });
+        },
+    });
+};
+
+export { getFoods, getFood, deleteFood, createFood, updateFood };

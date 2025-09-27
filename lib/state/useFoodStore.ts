@@ -1,0 +1,62 @@
+import { foodFilterDefaultValues, FoodFilterSchema } from "@/types/schema/foodFilterSchema";
+import { createStore } from "./createStore";
+
+type State = {
+    selectedFoodId: number | null;
+    foodDialogOpen: boolean;
+    foodFilters: FoodFilterSchema;
+    foodFiltersDrawerOpen: boolean;
+}
+
+type Action = {
+    updateSelectedFoodId: (id: State["selectedFoodId"]) => void;
+    updateFoodDialogOpen: (is: State["foodDialogOpen"]) => void;
+    updateFoodFilters: (filters: State["foodFilters"]) => void;
+    updateFoodFiltersDrawerOpen: (is: State["foodFiltersDrawerOpen"]) => void;
+    updateFoodFiltersPage: (action: "next" | "prev" | number ) => void;
+    updateFoodFiltersSearchTerm: ( str: State["foodFilters"]["searchTerm"] ) => void;
+}
+
+type Store = State & Action;
+
+const useFoodsStore = createStore<Store>((set) => ({
+    selectedFoodId: null,
+    foodDialogOpen: false,
+    foodFilters: foodFilterDefaultValues,
+    foodFiltersDrawerOpen: false,
+
+    updateSelectedFoodId: (id) => set((state) => {state.selectedFoodId = id}),
+    updateFoodDialogOpen: (is) => set((state) => {state.foodDialogOpen = is}),
+    updateFoodFilters: (filters) => set((state) => {state.foodFilters = filters}),
+    updateFoodFiltersDrawerOpen: (is) => set((state) => {state.foodFiltersDrawerOpen = is}),
+    updateFoodFiltersPage: (action) => set((state) => {
+        const currentPage = state.foodFilters.page;
+        let newPage = currentPage;
+
+        if (action === "next") {
+            newPage = currentPage + 1;
+        } else if (action === "prev") {
+            newPage = Math.max(currentPage - 1, 1);
+        } else if (typeof action === "number") {
+            newPage = action;
+        }
+
+        return {
+            foodFilters: {
+                ...state.foodFilters,
+                page: newPage,
+            },
+        };
+    }),
+    updateFoodFiltersSearchTerm: (searchTerm) =>
+        set((state) => {
+            state.foodFilters.searchTerm = searchTerm;
+        }),
+    }),
+    {
+        name: "foods-store",
+        excludeFromPersist: ["foodFilters"],
+    },
+);
+
+export { useFoodsStore };
