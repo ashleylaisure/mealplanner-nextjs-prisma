@@ -26,7 +26,7 @@ const ROUTE_GROUPS: RouteGroupType[] = [
         group: 'Foods Management',
         items: [
             { 
-                href: '/admin/food-management/foods', 
+                href: '/admin/foods-management/foods', 
                 label: 'Foods', 
                 icon: <Apple className="mr-2 size-3" /> 
             },

@@ -3,7 +3,7 @@ import { patterns } from "./constants";
 
 const regexSchema = (pattern: RegExp) => z.coerce.string().regex(pattern);
 
-const requiredStringSchema = z.string().trim().min(1).max(255);
+const requiredStringSchema = z.string().min(1).max(255).trim();
 
 const passwordSchema = z
     .string()

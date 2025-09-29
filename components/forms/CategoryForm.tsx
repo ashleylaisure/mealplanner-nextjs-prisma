@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
-import ControlledInput from '../ui/controlled/ControlledInput';
+import ControlledInput from './element/FormInput';
 import { useEffect } from 'react';
 
 type CategoryFormProps = {

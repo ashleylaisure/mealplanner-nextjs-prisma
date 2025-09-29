@@ -18,7 +18,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { Plus } from "lucide-react";
-import ControlledInput from "../ui/controlled/ControlledInput"
+import ControlledInput from "./element/FormInput"
 
 
 const ServingUnitForm = ({smallTrigger}: {smallTrigger? : boolean}) => {

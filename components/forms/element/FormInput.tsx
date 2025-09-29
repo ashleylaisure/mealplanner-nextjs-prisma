@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 import React, { ComponentProps } from 'react'
 import { Controller, FieldValues, Path, useFormContext } from 'react-hook-form';
 import { Input } from "@/components/ui/input";
-import { Label } from '../label';
+import { Label } from '../../ui/label';
 
 type InputProps<T extends FieldValues> = {
     name: Path<T>;
@@ -10,7 +10,7 @@ type InputProps<T extends FieldValues> = {
     containerClassName?: string;
 } & ComponentProps<"input">;
 
-const ControlledInput = <T extends FieldValues>({ className, type, name, label, containerClassName, ...props }: InputProps<T>) => {
+const FormInput = <T extends FieldValues>({ className, type, name, label, containerClassName, ...props }: InputProps<T>) => {
 
     const { control } = useFormContext<T>();
     return (
@@ -44,4 +44,4 @@ const ControlledInput = <T extends FieldValues>({ className, type, name, label, 
     )
 }
 
-export default ControlledInput
+export default FormInput

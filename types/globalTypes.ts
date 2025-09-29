@@ -5,3 +5,8 @@ export type PaginatedResult<T> = {
     pageSize: number;
     totalPages:number;
 };
+
+export type ValueLabel = {
+    value: string | number;
+    label: string;
+}

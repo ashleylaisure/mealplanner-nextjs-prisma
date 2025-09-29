@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import DashboardLayout from "./_components/DashboardLayout"
+import DashboardLayout from "../../components/navigation/DashboardLayout"
 
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
