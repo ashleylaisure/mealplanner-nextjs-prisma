@@ -136,7 +136,7 @@ const FoodForm = () => {
                   placeholder="grams"
                 />
                 <FormInput<FoodSchema>
-                  name="carbohydrates"
+                  name="carbohydrate"
                   label="Carbohydrates"
                   type="number"
                   placeholder="grams"

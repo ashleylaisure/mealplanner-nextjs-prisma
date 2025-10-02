@@ -1,3 +1,4 @@
+import FoodCards from '@/components/cards/FoodCards'
 import FoodFilters from '@/components/forms/FoodFilters'
 import FoodForm from '@/components/forms/FoodForm'
 import React from 'react'
@@ -10,7 +11,7 @@ const FoodsPage = () => {
                 <FoodForm />
             </div>
             <FoodFilters />
-            {/* FoodCards */}
+            <FoodCards />
         </div>
     )
 }

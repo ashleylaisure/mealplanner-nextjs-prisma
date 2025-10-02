@@ -40,8 +40,8 @@ const FoodFilters = () => {
         foodFilters,
     } = useFoodsStore()
 
-    const areFiltersModified = useMemo(() => 
-        !equal(foodFilters, foodFilterDefaultValues),
+    const areFiltersModified = useMemo(
+        () => !equal(foodFilters, foodFilterDefaultValues),
         [foodFilters],
     )
 

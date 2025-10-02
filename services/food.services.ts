@@ -128,10 +128,12 @@ const getFoods = async (filters: FoodFilterSchema): Promise<PaginatedResult<Food
                 foodServingUnits: true,
                 // servingUnits: true,
             },
-            // Ensure all required fields are selected
-            // If you use 'include', Prisma returns all scalar fields by default,
-            // but if you use 'select', you must specify all fields.
-        }),
+        }).then(foods =>
+            foods.map(food => ({
+                ...food,
+                carbohydrate: food.carbohydrate,
+            }))
+        ),
     ]);
 
     return {
