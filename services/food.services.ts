@@ -128,12 +128,7 @@ const getFoods = async (filters: FoodFilterSchema): Promise<PaginatedResult<Food
                 foodServingUnits: true,
                 // servingUnits: true,
             },
-        }).then(foods =>
-            foods.map(food => ({
-                ...food,
-                carbohydrate: food.carbohydrate,
-            }))
-        ),
+        })
     ]);
 
     return {

@@ -61,9 +61,12 @@ const FoodFilters = () => {
     }, [foodFilters, foodFiltersDrawerOpen, form])
 
     const onSubmit: SubmitHandler<FoodFilterSchema> = (data) => {
+        console.log("submitting food filters: ", data)
         updateFoodFilters(data);
         updateFoodFiltersDrawerOpen(false)
     }
+
+    
 
     return (
         <Drawer
@@ -139,6 +142,10 @@ const FoodFilters = () => {
                                     max={9999}
                                 />
                             </div>
+
+                            {Object.keys(form.formState.errors).length > 0 && (
+                                <pre>{JSON.stringify(form.formState.errors, null, 2)}</pre>
+                            )}
                         </div>
 
                         <DrawerFooter className="pt-2">
@@ -164,6 +171,8 @@ const FoodFilters = () => {
                     </DrawerContent>
                 </form>
             </FormProvider>
+
+            
 
         </Drawer>
     )

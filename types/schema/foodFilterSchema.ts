@@ -1,15 +1,16 @@
 import { patterns } from "@/lib/constants";
+import { regexSchema } from "@/lib/zodSchemas";
 import z from "zod";
 
 const foodFilterSchema = z.object({
     searchTerm: z.string(),
     caloriesRange: z.tuple([
-        z.string().regex(patterns.zeroTo9999),
-        z.string().regex(patterns.zeroTo9999),
+        regexSchema(patterns.zeroTo9999),
+        regexSchema(patterns.zeroTo9999),
     ]),
     proteinRange: z.tuple([
-        z.string().regex(patterns.zeroTo9999),
-        z.string().regex(patterns.zeroTo9999),
+        regexSchema(patterns.zeroTo9999),
+        regexSchema(patterns.zeroTo9999),
     ]),
     categoryId: z.string(),
     sortBy: z.enum(["name", "calories", "protein", "carbohydrate", "fat"]).optional(),
