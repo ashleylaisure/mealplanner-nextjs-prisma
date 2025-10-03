@@ -1,11 +1,11 @@
 'use client'
 import useServingUnitsStore from '@/lib/state/useServingUnitsStore';
-import { useServingUnits } from '@/services/queries/servingUnit.queries';
+import { useServingUnits } from '@/services/actions/servingUnit.queries';
 import NoItemsFound from '../NoItemsFound';
 import ServingUnitSkeleton from './ServingUnitSkeleton';
 import { Button } from '../ui/button';
 import { Edit, Trash } from 'lucide-react';
-import { useDeleteServingUnit } from '@/services/mutations/servingunits.mutations';
+import { useDeleteServingUnit } from '@/services/actions/servingunits.mutations';
 import { alert } from '@/lib/state/GlobalStore';
 
 const ServingUnitCards = () => {

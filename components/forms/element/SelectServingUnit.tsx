@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { useServingUnits } from '@/services/queries/servingUnit.queries'
+import { useServingUnits } from '@/services/actions/servingUnit.queries'
 import { FoodSchema } from '@/types/schema/foodSchema'
 import { CirclePlus, Trash2, UtensilsCrossed } from 'lucide-react'
 import React from 'react'

@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
-import { useCategories } from '@/services/queries/categories.queries';
-import { useDeleteCategory } from '@/services/mutations/categories.mutations';
+import { useCategories } from '@/services/actions/categories.queries';
+import { useDeleteCategory } from '@/services/actions/categories.mutations';
 import { Button } from '@/components/ui/button';
 import { Edit, Trash } from 'lucide-react';
 import { alert } from '@/lib/state/GlobalStore';

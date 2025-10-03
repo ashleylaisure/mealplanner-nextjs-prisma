@@ -6,7 +6,7 @@ import React, { useEffect, useMemo } from 'react'
 import { FormProvider, SubmitHandler, useForm, useWatch } from 'react-hook-form'
 import equal from "fast-deep-equal";
 import useDebounce from '@/lib/useDebounce'
-import { useCategories } from '@/services/queries/categories.queries'
+import { useCategories } from '@/services/actions/categories.queries'
 import {
     Drawer,
     DrawerClose,

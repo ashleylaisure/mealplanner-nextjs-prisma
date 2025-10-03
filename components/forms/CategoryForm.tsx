@@ -1,7 +1,7 @@
 'use client';
 
-import { useCreateCategory, useUpdateCategory } from '@/services/mutations/categories.mutations';
-import { useCategory } from '@/services/queries/categories.queries';
+import { useCreateCategory, useUpdateCategory } from '@/services/actions/categories.mutations';
+import { useCategory } from '@/services/actions/categories.queries';
 import useCategoriesStore from '@/lib/state/useCategoriesStore';
 import { categoryDefaultValues, categorySchema, CategorySchema } from '@/types/schema/categorySchema';
 import { zodResolver } from "@hookform/resolvers/zod";

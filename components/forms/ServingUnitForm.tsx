@@ -1,8 +1,8 @@
 'use client'
 
 import useServingUnitsStore from "@/lib/state/useServingUnitsStore"
-import { useCreateServingUnit, useUpdateServingUnit } from "@/services/mutations/servingunits.mutations"
-import { useServingUnit } from "@/services/queries/servingUnit.queries"
+import { useCreateServingUnit, useUpdateServingUnit } from "@/services/actions/servingunits.mutations"
+import { useServingUnit } from "@/services/actions/servingUnit.queries"
 import { servingUnitDefaultValues, servingUnitSchema, ServingUnitSchema } from "@/types/schema/servingUnitSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useEffect } from "react"
