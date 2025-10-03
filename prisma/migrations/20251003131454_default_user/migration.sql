@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Meal" ALTER COLUMN "userId" SET DEFAULT 1;
