@@ -22,6 +22,12 @@ const mealSchema = z.intersection(
 
 type MealSchema = z.infer<typeof mealSchema>;
 
+type MealFood = {
+    foodId: string;
+    servingUnitId: string;
+    amount: number;
+};
+
 const mealDefaultValues: MealSchema = {
     action: "create",
     dateTime: new Date(),
@@ -31,4 +37,4 @@ const mealDefaultValues: MealSchema = {
     ]
 }
 
-export { mealSchema, mealDefaultValues, type MealSchema };
+export { mealSchema, mealDefaultValues, type MealSchema, type MealFood };

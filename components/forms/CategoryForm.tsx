@@ -18,6 +18,7 @@ import { Button } from '../ui/button';
 import { Plus } from 'lucide-react';
 import ControlledInput from './controlled/FormInput';
 import { useEffect } from 'react';
+import { Separator } from '@radix-ui/react-separator';
 
 type CategoryFormProps = {
     smallTrigger?: boolean;
@@ -40,6 +41,8 @@ const CategoryForm = ({ smallTrigger }: CategoryFormProps) => {
     const categoryQuery = useCategory();
     const createCategoryMutation = useCreateCategory();
     const updateCategoryMutation = useUpdateCategory();
+
+    const foodCategory = categoryQuery.data;
 
     useEffect(() => {
         if (!!selectedCategoryId && categoryQuery.data) {
@@ -104,6 +107,12 @@ const CategoryForm = ({ smallTrigger }: CategoryFormProps) => {
                             label="Name"
                             placeholder="e.g. Produce"
                         />
+
+                        <Separator className="my-4" />
+
+                        <div>
+                            
+                        </div>
                     </FormProvider>
                     <DialogFooter>
                         <Button
