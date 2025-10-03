@@ -26,7 +26,9 @@ const mealDefaultValues: MealSchema = {
     action: "create",
     dateTime: new Date(),
     userId: "",
-    mealFoods: []
+    mealFoods: [
+        { foodId: "", servingUnitId: "", amount: "" }
+    ]
 }
 
 export { mealSchema, mealDefaultValues, type MealSchema };

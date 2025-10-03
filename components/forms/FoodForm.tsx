@@ -18,10 +18,10 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '../ui/button'
 import { Plus } from 'lucide-react'
-import FormInput from './element/FormInput'
-import FormSelect from './element/FormSelect'
+import FormInput from './controlled/FormInput'
+import FormSelect from './controlled/FormSelect'
 import CategoryForm from './CategoryForm'
-import SelectServingUnit from './element/SelectServingUnit'
+import SelectServingUnit from './controlled/SelectServingUnit'
 
 const FoodForm = () => {
     

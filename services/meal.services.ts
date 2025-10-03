@@ -1,4 +1,4 @@
-import { auth } from "@/lib/auth";
+'use server'
 import { executeAction } from "@/lib/executeAction";
 import db from "@/lib/prisma";
 import { toNumberSafe, toStringSafe } from "@/lib/utils";

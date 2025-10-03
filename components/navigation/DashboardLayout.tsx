@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { ThemeToggle } from '@/components/theme-toggle'
+import ManagementTabs from './ManagementTabs'
 
 
 type RouteGroupType = {
@@ -26,32 +27,37 @@ const ROUTE_GROUPS: RouteGroupType[] = [
         group: 'Foods Management',
         items: [
             { 
-                href: '/admin/foods-management/foods', 
+                href: '/foods', 
                 label: 'Foods', 
                 icon: <Apple className="mr-2 size-3" /> 
             },
             { 
-                href: '/admin/foods-management/categories', 
+                href: '/categories', 
                 label: 'Categories', 
                 icon: <Boxes className="mr-2 size-3" /> 
             },
             {
-                href: '/admin/foods-management/serving-units',
+                href: '/serving-units',
                 label: 'Serving Units',
                 icon: <Ruler className="mr-2 size-3" />
+            },
+            {
+                href: '/meals',
+                label: 'Meals',
+                icon: <Utensils className="mr-2 size-3" />
             }
         ],
     },
-    {
-        group: 'Meals Management',
-        items: [
-            { 
-                href: '/client', 
-                label: 'Meals', 
-                icon: <Utensils className="mr-2 size-3" /> 
-            }
-        ],
-    }
+    // {
+    //     group: 'Meals Management',
+    //     items: [
+    //         { 
+    //             href: '/client', 
+    //             label: 'Meals', 
+    //             icon: <Utensils className="mr-2 size-3" /> 
+    //         }
+    //     ],
+    // }
 ]
 
 const RouteGroup = ({group, items}: RouteGroupType) => {
@@ -186,6 +192,7 @@ const DashboardLayout = ({children}: {children: ReactNode}) => {
             </Collapsible.Root>
 
             <main className={`transition-margin mt-13 flex-1 p-4 duration-300 ${isOpen ? 'ml-64' : 'ml-0'}`}>
+                <ManagementTabs />
                 {children}
             </main>
 

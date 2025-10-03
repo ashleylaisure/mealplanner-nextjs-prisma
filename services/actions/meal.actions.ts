@@ -2,7 +2,7 @@ import { MealSchema } from "@/types/schema/mealSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createMeal, deleteMeal, getMeal, getMeals, updateMeal } from "../meal.services";
 import { toast } from "sonner";
-import useMealsStore from "@/lib/state/mealStore";
+import useMealsStore from "@/lib/state/useMealStore";
 
 
 const useCreateMeal = () => {

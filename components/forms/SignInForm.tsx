@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
-import FormInput from "./element/FormInput";
+import FormInput from "./controlled/FormInput";
 
 const SignInForm = () => {
     const form = useForm<SignInSchema>({

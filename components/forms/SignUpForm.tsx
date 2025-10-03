@@ -3,7 +3,7 @@ import { signUpDefaultValues, signUpSchema, SignUpSchema } from '@/types/schema/
 import { zodResolver } from '@hookform/resolvers/zod'
 import React from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
-import FormInput from './element/FormInput'
+import FormInput from './controlled/FormInput'
 import { Button } from '../ui/button'
 import Link from 'next/link'
 

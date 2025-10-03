@@ -17,11 +17,11 @@ import {
     DrawerTitle,
     DrawerTrigger,
 } from "@/components/ui/drawer";
-import FormInput from './element/FormInput'
+import FormInput from './controlled/FormInput'
 import { Button } from '../ui/button'
 import { FilterIcon } from 'lucide-react'
-import FormSelect from './element/FormSelect'
-import Slider from './element/Slider'
+import FormSelect from './controlled/FormSelect'
+import Slider from './controlled/Slider'
 
 
 const FoodFilters = () => {
